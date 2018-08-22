@@ -4,13 +4,32 @@
   text-align: center;
   height: 100px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .header-container__title {
+  font-size: 1.5em;
+  font-weight: 300;
   padding: 0;
   margin: 0;
+  flex: 4;
 }
 
+.header-container__navigation {
+  flex: 6;
+}
 
+.header-container__links {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 15px;
+  transition: border_bottom, 200ms;
+}
+
+.header-container__links:hover {
+  border-bottom: 2px solid #fff;
+  padding-bottom: 6px;
+  
+}

@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 
 const API_URL = "http://192.168.1.190:3001/api"
-class Login extends Component {
+
+class Signup extends Component {
     constructor() {
         super();
 
         this.state = {
-        
+            username: "",
             email: "",
             password: ""
         }
@@ -22,7 +23,7 @@ class Login extends Component {
     
         event.preventDefault();
 
-    return fetch(`${API_URL}/login`, {
+    return fetch(`${API_URL}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,12 +33,14 @@ class Login extends Component {
     })
       .then(res => res.json())
       .then((response) => {
+          debugger
         if (response.errors) {
             throw Error(response.errors);
         } else{
     
           localStorage.setItem('Token', response.token);
           localStorage.setItem('Username', response.username);
+          this.props.history.push("/")
         }        
       })
       .catch( error => {
@@ -47,10 +50,11 @@ class Login extends Component {
       })
         .then(
         this.setState({
-          email: "",
-          password: ""
+            username: "",
+            email: "",
+            password: ""
         }),
-        this.props.history.push("/")
+
       )
     }
 
@@ -60,6 +64,15 @@ class Login extends Component {
                 <h1>Please Login</h1>
 
                 <form className="login-form" onSubmit={(event) => this.handleSubmit(event)}>
+
+                    <label>Username</label>
+                    <input 
+                    type="text" 
+                    name="username"
+                    placeholder="Please choose a username"
+                    onChange={(event) => this.handleChange(event)}
+                    value={this.state.username}
+                    />
 
                     <label>Email</label>
                     <input 
@@ -72,7 +85,7 @@ class Login extends Component {
 
                     <label>Password</label>
                     <input 
-                    type="text" 
+                    type="password" 
                     name="password"
                     placeholder="Please select a password"
                     onChange={(event) => this.handleChange(event)}
@@ -87,4 +100,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Signup;
