@@ -6,9 +6,9 @@ const Header = () => {
         
         <header className="header-container">
 
-            <h1 className="header-container__title">Pool Game Tracker</h1>
+            <h1 className="header-container__title" r={6}>Pool Game Tracker</h1>
 
-            <nav className="header-container__navigation">
+            <nav className="header-container__navigation" r={6}>
                 <Link to="/login" className="header-container__links">Login</Link>
                 <Link to="/signup" className="header-container__links">Signup</Link>
                 <Link to="/" className="header-container__links">Home</Link>

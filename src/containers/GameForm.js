@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { authenticate } from '../actions/authActions'
 
 const API_URL = "http://192.168.1.190:3001/api"
 
-class Login extends Component {
-    constructor() {
-        super();
+class GameForm extends Component {
+    constructor(props) {
+        super(props);
 
         this.state = {
         
             player1: "",
             player2: "",
-            winner: ""
+            winner: "",
+            users: this.props.users
         }
     }
 
@@ -25,6 +30,8 @@ class Login extends Component {
     }
 
     render() {
+        
+        console.log(this.props.users)
         return (
 
             <article>
@@ -63,4 +70,19 @@ class Login extends Component {
     }
 }
 
-export default GameForm;
+const mapStateToProps = (state) => {
+    console.log("auth", state.auth)
+    return {
+        users: state.auth.all_users
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+
+    return bindActionCreators({
+        authenticate: authenticate,
+    }, dispatch);
+
+};
+
+export default connect(mapStateToProps)(GameForm);

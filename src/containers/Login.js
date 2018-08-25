@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
+import { Button, Icon, Input, Row, Col, Card} from 'react-materialize';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-const API_URL = "http://192.168.1.190:3001/api"
+import { authenticate } from '../actions/authActions'
+
 class Login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
         
@@ -21,70 +25,60 @@ class Login extends Component {
     handleSubmit = (event) => {
     
         event.preventDefault();
-
-    return fetch(`${API_URL}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      
-      body: JSON.stringify({user: this.state})
-    })
-      .then(res => res.json())
-      .then((response) => {
-        if (response.errors) {
-            throw Error(response.errors);
-        } else{
-    
-          localStorage.setItem('Token', response.token);
-          localStorage.setItem('Username', response.username);
-        }        
-      })
-      .catch( error => {
-    
-        window.alert(error)
-        localStorage.clear()
-      })
-        .then(
+        this.props.authenticate(this.state, this.props.history)
+        
         this.setState({
-          email: "",
-          password: ""
-        }),
-        this.props.history.push("/")
-      )
+            email: "",
+            password: ""
+        })
     }
 
     render() {
         return (
+     
             <article className="login-container">
-                <h1>Please Login</h1>
-
+                    
+                <h1 className="login-container__title" s={12}>Please Login</h1>
+                   
                 <form className="login-form" onSubmit={(event) => this.handleSubmit(event)}>
-
-                    <label>Email</label>
-                    <input 
-                    type="text" 
+                    
+                    <Input 
+                    label="Email"
+                    type="email" 
                     name="email"
                     placeholder="Please enter your email"
                     onChange={(event) => this.handleChange(event)}
                     value={this.state.email}
+                    
                     />
-
-                    <label>Password</label>
-                    <input 
-                    type="text" 
+                        
+                    <Input 
+                
+                    label="Password"
+                    type="password" 
                     name="password"
                     placeholder="Please select a password"
                     onChange={(event) => this.handleChange(event)}
                     value={this.state.password}
                     />
+                       
+                    <Button waves="light" type="submit" className="btn custom-btn red">Submit</ Button>
 
-                    <button type="submit" className="btn custom-btn">Submit</button>
                 </form>
-
+                
             </article>
+  
         )
     }
 }
+  
+const mapDispatchToProps = (dispatch) => {
 
-export default Login;
+    return bindActionCreators({
+        authenticate: authenticate,
+    }, dispatch);
+
+};
+
+export default connect(null, mapDispatchToProps)(Login);
+

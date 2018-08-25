@@ -33,3 +33,15 @@
   padding-bottom: 6px;
   
 }
+
+.login-container__title {
+  
+  font-size: 2em;
+  
+}
+
+.signup-container, .login-container {
+
+  padding: 10% 25%;
+
+}

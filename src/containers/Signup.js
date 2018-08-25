@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import { signup } from '../actions/authActions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-const API_URL = "http://192.168.1.190:3001/api"
+const API_URL = "http://192.168.1.190:3001/api";
 
 class Signup extends Component {
     constructor() {
@@ -22,48 +25,22 @@ class Signup extends Component {
     handleSubmit = (event) => {
     
         event.preventDefault();
-
-    return fetch(`${API_URL}/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      
-      body: JSON.stringify({user: this.state})
-    })
-      .then(res => res.json())
-      .then((response) => {
-          debugger
-        if (response.errors) {
-            throw Error(response.errors);
-        } else{
-    
-          localStorage.setItem('Token', response.token);
-          localStorage.setItem('Username', response.username);
-          this.props.history.push("/")
-        }        
-      })
-      .catch( error => {
-    
-        window.alert(error)
-        localStorage.clear()
-      })
-        .then(
+        this.props.signup(this.state, this.props.history)
+        
         this.setState({
             username: "",
             email: "",
             password: ""
-        }),
-
-      )
+        })
+    
     }
 
     render() {
         return (
-            <article className="login-container">
-                <h1>Please Login</h1>
+            <article className="signup-container">
+                <h1 className="signup-container__title">Please Signup</h1>
 
-                <form className="login-form" onSubmit={(event) => this.handleSubmit(event)}>
+                <form className="signup-form" onSubmit={(event) => this.handleSubmit(event)}>
 
                     <label>Username</label>
                     <input 
@@ -87,17 +64,24 @@ class Signup extends Component {
                     <input 
                     type="password" 
                     name="password"
+                    
                     placeholder="Please select a password"
                     onChange={(event) => this.handleChange(event)}
                     value={this.state.password}
                     />
 
-                    <button type="submit" className="btn custom-btn">Submit</button>
+                    <button type="submit" className="btn custom-btn red">Submit</button>
                 </form>
 
             </article>
         )
     }
 }
-
-export default Signup;
+  
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        signup:  signup,
+    }, dispatch);
+};
+  
+  export default connect(null, mapDispatchToProps)(Signup);

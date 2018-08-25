@@ -1,29 +1,32 @@
-import {
-    createStore,
-    applyMiddleware,
-    combineReducers,
-    Store
-} from 'redux';
-import thunk from 'redux-thunk';
+// import authReducer from './reducers/authReducer'
 
-const GamesReducer = (state = [], action) => {
-    switch(action.type) {
-        case "GET_GAMES_SUCCESS":
-        return action.games;
+// import {
+//     createStore,
+//     applyMiddleware,
+//     combineReducers,
+//     Store
+// } from 'redux';
+// import thunk from 'redux-thunk';
 
-        default:
-            return state;
-    }
-}
+// const GamesReducer = (state = [], action) => {
+//     switch(action.type) {
+//         case "GET_GAMES_SUCCESS":
+//         return action.games;
 
-const reducers = combineReducers({
-    games: GamesReducer
-})
+//         default:
+//             return state;
+//     }
+// }
 
-const middleware = [thunk];
 
-export default createStore(
-    reducers,
-    applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSTION__ && window.__REDUX_DEVTOOLS_EXTENSTION__()
-)
+// const reducers = combineReducers({
+//     auth: authReducer
+// })
+
+// const middleware = [thunk];
+
+// export default createStore(
+//     reducers,
+//     applyMiddleware(...middleware),
+//     window.__REDUX_DEVTOOLS_EXTENSTION__ && window.__REDUX_DEVTOOLS_EXTENSTION__()
+// )
