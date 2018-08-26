@@ -1,7 +1,6 @@
 export default (state = {
     authenticated: false,
     current_user: "",
-    all_users: [],
     errors: []
 }, action) => {
 
@@ -21,8 +20,16 @@ export default (state = {
             ...state,
             authenticated: true,
             current_user: action.user.username,
-            all_users: [...state.all_users, action.user]
         }
+
+        case 'AUTHENTICATION_FAILURE':
+            return {
+                token: null,
+                name: "",
+                authenticating: false,
+                authenticated: false,
+                errors: action.errors
+            }
         
         default:
             return  state

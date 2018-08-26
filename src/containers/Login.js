@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Icon, Input, Row, Col, Card} from 'react-materialize';
+//import { Button, Input} from 'react-materialize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -42,7 +42,7 @@ class Login extends Component {
                    
                 <form className="login-form" onSubmit={(event) => this.handleSubmit(event)}>
                     
-                    <Input 
+                    <input 
                     label="Email"
                     type="email" 
                     name="email"
@@ -52,7 +52,7 @@ class Login extends Component {
                     
                     />
                         
-                    <Input 
+                    <input 
                 
                     label="Password"
                     type="password" 
@@ -62,7 +62,7 @@ class Login extends Component {
                     value={this.state.password}
                     />
                        
-                    <Button waves="light" type="submit" className="btn custom-btn red">Submit</ Button>
+                    <button waves="light" type="submit" className="btn custom-btn red">Submit</ button>
 
                 </form>
                 

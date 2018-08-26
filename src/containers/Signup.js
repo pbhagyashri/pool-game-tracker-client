@@ -3,8 +3,6 @@ import { signup } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-const API_URL = "http://192.168.1.190:3001/api";
-
 class Signup extends Component {
     constructor() {
         super();
