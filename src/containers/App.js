@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Login from '../containers/Login';
 import Signup from '../containers/Signup';
 import Leaderboard from '../containers/Leaderboard';
+import GameForm from '../containers/GameForm';
 
 import './App.css';
 
@@ -38,7 +39,8 @@ class App extends Component {
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/signup" component={Signup} />
 				<Route exact path="/" component={Leaderboard} />
-			
+				<Route exact path="/games/new" component={GameForm} />
+
 			</div>
 		</Router>
 		);

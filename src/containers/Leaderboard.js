@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 //import { Button, Icon, Input, Row, Col, Card} from 'react-materialize';
-//import { connect } from 'react-redux';
-//import { bindActionCreators } from 'redux';
 
-//import { getUsers } from '../actions/userActions';
+import { getUsers } from '../actions/userActions';
 import LeaderboardCard from '../components/LeaderboardCard'
 
 const API_URL = "http://192.168.1.190:3001/api"
@@ -27,10 +25,11 @@ class Leaderboard extends Component {
         .then((users) => {
             this.setState({users})
         })
+    
     }
 
     render() {
-        
+    
         return (
             <div>
                 <LeaderboardCard users={this.state.users} />
@@ -40,4 +39,4 @@ class Leaderboard extends Component {
 
 }
 
-export default Leaderboard
+export default Leaderboard;

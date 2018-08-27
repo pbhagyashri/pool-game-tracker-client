@@ -1,86 +1,129 @@
-// import React, {Component} from 'react';
-// import { connect } from 'react-redux';
-// //import { bindActionCreators } from 'redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Input } from 'react-materialize';
+import { authenticate } from '../actions/authActions'
+import Login from './Login'
+const API_URL = "http://192.168.1.190:3001/api"
 
-// import { authenticate } from '../actions/authActions'
+class GameForm extends Component {
+    constructor(props) {
+        super(props);
 
-// class GameForm extends Component {
-//     constructor(props) {
-//         super(props);
+        this.state = {
 
-//         this.state = {
+            player1: "",
+            player2: "",
+            winner: "",
+            users: []
+        }
+
+        fetch(`${API_URL}/users`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(res => res.json())
+        .then((users) => {
+            this.setState({users})
+        })
+    }
+
+    handleChange = (event) => {
+    
+        this.setState({
+        [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit = (event) => {
         
-//             player1: "",
-//             player2: "",
-//             winner: "",
-//             users: this.props.users
-//         }
-//     }
-
-//     handleChange = (event) => {
-//         this.setState({
-//             [event.target.name]: event.target.value
-//         })
-//     }
-
-//     handleSubmit = (event) => {
-//         event.preventDefault();
-//     }
-
-//     render() {
+        event.preventDefault();
         
-//         console.log(this.props.users)
-//         return (
+        fetch(`${API_URL}/games`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ game: {
+                player1: this.state.player1,
+                player2: this.state.player2,
+                winner: this.state.winner
+            } })
+        })
+        .then(res => res.json())
+        .then((game) => {
+           
+        })
+            
 
-//             <article>
-//                 <h1>Start a new Game</h1>
-                
-//                 <form  className="game-form" onSubmit={(event) => this.handleSubmit(event)}>
+    }
 
-//                     <label>Player1</label>
-//                     <input 
-//                     type="text" 
-//                     name="email"
-//                     placeholder="Please enter your email"
-//                     onChange={(event) => this.handleChange(event)}
-//                     value={this.state.player1}
-//                     />
+    render() {
+        let allUsers = this.state.users
 
-//                     <input 
-//                     type="text" 
-//                     name="email"
-//                     placeholder="Please enter your email"
-//                     onChange={(event) => this.handleChange(event)}
-//                     value={this.state.player2}
-//                     />
+        return (
 
-//                     <input 
-//                     type="text" 
-//                     name="email"
-//                     placeholder="Please enter your email"
-//                     onChange={(event) => this.handleChange(event)}
-//                     value={this.state.winner}
-//                     />
-                
-//                 </form>
-//             </article>
-//         )
-//     }
-// }
+            <article className="game-form-container">
+                <h1  className="game-form-container__title">Start a new Game</h1>
+            
+                <form className="game-form" onSubmit={(event) => this.handleSubmit(event)}>
 
-// const mapStateToProps = (state) => {
-//     console.log("auth", state.auth)
-//     return {
-//         users: state.auth.all_users
-//     }
-// }
+                    <Input 
+                    type='select' 
+                    label="Player1" name="player1"
+                    value={this.state.player1} 
+                    onChange={(event) => this.handleChange(event)}>
 
-// // const mapDispatchToProps = (dispatch) => {
+                        {allUsers.map(user => <option>{user.username}</option> )}
 
-// //     return bindActionCreators({
-// //         authenticate: authenticate,
-// //     }, dispatch);
+                    </Input>
 
-// // };
+                    <Input 
+                    type='select' 
+                    name="player2" 
+                    label="Player2" 
+                    value={this.state.player2}  
+                    onChange={(event) => this.handleChange(event)}>
 
-// export default connect(mapStateToProps)(GameForm);
+                        {allUsers.map(user => <option>{user.username}</option>)}
+
+                    </Input>
+
+                    <Input 
+                    type='select' 
+                    name="winner" 
+                    label="Winner" 
+                    value={this.state.winner}  
+                    onChange={(event) => this.handleChange(event)}>
+
+                        <option>{this.state.player1}</option>
+                        <option>{this.state.player2}</option>
+                    
+                    </Input>
+
+                    <button waves="light" type="submit" className="btn custom-btn red">Submit</ button>
+                </form>
+
+            </article>
+        )
+    }
+}
+
+const mapStateToProps = (state) => {
+    //console.log("auth", state.auth)
+    return {
+        users: state.auth.all_users
+    }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+
+//     return bindActionCreators({
+//         authenticate: authenticate,
+//     }, dispatch);
+
+// };
+
+export default connect(mapStateToProps)(GameForm);
