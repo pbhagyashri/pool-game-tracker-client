@@ -11,7 +11,7 @@ const Header = () => {
             <nav className="header-container__navigation" r={6}>
                 <Link to="/login" className="header-container__links">Login</Link>
                 <Link to="/signup" className="header-container__links">Signup</Link>
-                <Link to="/" className="header-container__links">Home</Link>
+                <Link to="/" className="header-container__links">Leaderboard</Link>
                 <Link to="/login" className="header-container__links">Profile</Link>
                 <Link to="/games/new" className="header-container__links">Start a Game</Link>
                 

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Input } from 'react-materialize';
 import { authenticate } from '../actions/authActions'
-import Login from './Login'
+import { createGame } from '../actions/gameActions'
+
 const API_URL = "http://192.168.1.190:3001/api"
 
 class GameForm extends Component {
@@ -40,24 +41,12 @@ class GameForm extends Component {
     handleSubmit = (event) => {
         
         event.preventDefault();
-        
-        fetch(`${API_URL}/games`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ game: {
-                player1: this.state.player1,
-                player2: this.state.player2,
-                winner: this.state.winner
-            } })
-        })
-        .then(res => res.json())
-        .then((game) => {
-           
-        })
-            
 
+        this.props.createGame({
+            player1: this.state.player1,
+            player2: this.state.player2,
+            winner: this.state.winner
+        }, this.props.history)
     }
 
     render() {
@@ -112,18 +101,18 @@ class GameForm extends Component {
 }
 
 const mapStateToProps = (state) => {
-    //console.log("auth", state.auth)
+
     return {
         users: state.auth.all_users
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
 
-//     return bindActionCreators({
-//         authenticate: authenticate,
-//     }, dispatch);
+    return bindActionCreators({
+        createGame: createGame,
+    }, dispatch);
 
-// };
+};
 
-export default connect(mapStateToProps)(GameForm);
+export default connect(mapStateToProps, mapDispatchToProps)(GameForm);

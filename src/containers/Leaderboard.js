@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-//import { Button, Icon, Input, Row, Col, Card} from 'react-materialize';
 
 import { getUsers } from '../actions/userActions';
 import LeaderboardCard from '../components/LeaderboardCard'
@@ -15,7 +14,7 @@ class Leaderboard extends Component {
             users: []
         }
 
-        fetch(`${API_URL}/users`, {
+        fetch(`${API_URL}/leaders`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,6 +22,7 @@ class Leaderboard extends Component {
         })
         .then(res => res.json())
         .then((users) => {
+            
             this.setState({users})
         })
     
