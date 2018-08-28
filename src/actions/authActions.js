@@ -92,8 +92,8 @@ export const authenticate = (credentials, history) => {
 
   export const logout = () => {
     return dispatch => {
-      localStorage.clear();
-      return dispatch({type: 'LOGGEDOUT'});
-    
+        window.alert("Thank you !")
+        localStorage.clear();
+        return dispatch({type: 'LOGGEDOUT'});
     }
   }
