@@ -70,18 +70,30 @@ export const authenticate = (credentials, history) => {
       })
       .then(res => res.json())
       .then(response => {
-
-        const token = response["token"];
-        localStorage.setItem('Token', token);
-        history.push("/")
-        dispatch(signupSuccess(response)) 
-      
-    })
-      .catch( error => {
-        console.log(error);
         
-        dispatch(authFailure(error))
+        if (response.errors) {
+            throw Error(response.errors);
+        } else if (response.token){
+
+            const token = response["token"];
+            localStorage.setItem('Token', token);
+            history.push("/")
+            dispatch(signupSuccess(response)) 
+        }
+    })
+      .catch( errors => {
+        
+        dispatch(authFailure(errors))
+        window.alert(errors)
         localStorage.clear()
       })
+    }
+  }
+
+  export const logout = () => {
+    return dispatch => {
+      localStorage.clear();
+      return dispatch({type: 'LOGGEDOUT'});
+    
     }
   }

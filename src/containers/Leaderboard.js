@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-
-import { getUsers } from '../actions/userActions';
 import LeaderboardCard from '../components/LeaderboardCard'
 
 const API_URL = "http://192.168.1.190:3001/api"

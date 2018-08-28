@@ -12,7 +12,7 @@ const LeaderboardCard = ({ users }) => {
                     
                     <Col l={3} m={6} s={12}>
                         <Card className='leaderbord-section__card'>
-                        <i class="material-icons leaderbord-section__icon">face</i>
+                        <i className="material-icons leaderbord-section__icon">face</i>
                         <p>{user.username}</p>
                         <hr></hr>
                         Rank {user.victories}

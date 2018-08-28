@@ -1,6 +1,10 @@
 import React from 'react'
 import { Row, Col } from 'react-materialize';
 import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+
+import Logout from '../containers/Logout';
+
 
 const Header = () => {
     return(
@@ -18,6 +22,7 @@ const Header = () => {
                         <Link to="/" className="header-container__links">Leaderboard</Link>
                         <Link to="/login" className="header-container__links">Profile</Link>
                         <Link to="/games/new" className="header-container__links">Start a Game</Link>
+                        <Route exact path="/" component={Logout} className="header-container__links logout-button"/>
                     </nav>
                 </Col>    
             </Row>

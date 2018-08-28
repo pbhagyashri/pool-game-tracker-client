@@ -31,6 +31,14 @@ export default (state = {
                 errors: action.errors
             }
         
+        case 'LOGGEDOUT':
+            return {
+              ...state,
+              current_user: "",
+              authenticated: false,
+          
+            }
+        
         default:
             return  state
         
