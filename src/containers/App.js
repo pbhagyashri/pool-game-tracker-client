@@ -5,29 +5,11 @@ import Login from '../containers/Login';
 import Signup from '../containers/Signup';
 import Leaderboard from '../containers/Leaderboard';
 import GameForm from '../containers/GameForm';
-import GameShow from '../components/GameShow';
+import GameShow from '../containers/GameShow';
 
 import './App.css';
 
 class App extends Component {
-
-	// constructor(props) {
-	// 	super(props)
-
-	// 	this.state = {users: []}
-
-	// 	fetch(`${API_URL}/users`, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //     .then(res => res.json())
-    //     .then((users) => {
-	// 		this.setState({users})
-	// 	})
-		
-	// }
 
 	render() {
    

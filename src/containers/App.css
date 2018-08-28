@@ -62,7 +62,16 @@
 .game-container__title {
   text-align: center;
   font-size: 2em;
-  
+}
+
+.game-container__links {
+  color: #ececec;
+  background-color: #d91e18;
+  width: 150px;
+  display: inline-block;
+  padding: 5px;
+  margin-top: 20px;
+  text-align: center;
 }
 
 @media only screen and (max-width: 426px) {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Card } from 'react-materialize';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 
 class GameShow extends Component {
 
@@ -20,8 +21,8 @@ class GameShow extends Component {
                     <p>Player1 - {this.props.games.player1}</p>
                     <p>Player2 - {this.props.games.player2}</p>
                     <p>Winner  - {this.props.games.winner}</p>
+                    <Link to="/" className="game-container__links">Leaderboard</Link>
                 </Card>
-                
             </div>
         )
     }
