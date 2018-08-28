@@ -5,6 +5,7 @@ import Login from '../containers/Login';
 import Signup from '../containers/Signup';
 import Leaderboard from '../containers/Leaderboard';
 import GameForm from '../containers/GameForm';
+import GameShow from '../components/GameShow';
 
 import './App.css';
 
@@ -40,6 +41,7 @@ class App extends Component {
 				<Route exact path="/signup" component={Signup} />
 				<Route exact path="/" component={Leaderboard} />
 				<Route exact path="/games/new" component={GameForm} />
+				<Route exact path="/games/:id" component={GameShow} />
 
 			</div>
 		</Router>

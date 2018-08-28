@@ -1,15 +1,18 @@
 export default (state = {
-    games: [],
-    errors: []
+    
+    player1: "",
+    player2: "",
+    winner: ""
 }, action) => {
 
     switch (action.type) {
-        
         case 'ADD_GAME':
+        
             return {
                 ...state,
-                games: [...state.games, action.game]
-    
+                player1: action.game.player1,
+                player2: action.game.player2,
+                winner: action.game.winner
             }
         
         default:

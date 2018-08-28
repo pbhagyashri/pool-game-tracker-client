@@ -101,7 +101,6 @@ class GameForm extends Component {
 }
 
 const mapStateToProps = (state) => {
-
     return {
         users: state.auth.all_users
     }
